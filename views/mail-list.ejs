@@ -1,0 +1,70 @@
+<%- include('header.ejs', { name }) %>
+
+<main>
+  <h2><%= title %></h2>
+
+  <% if (emails.length === 0) { %>
+  <p>No emails in the <%= title %>.</p>
+  <% } else { %>
+  <div class="email-container">
+    <% emails.forEach((email) => { %>
+    <div class="email-item">
+      <input
+        type="checkbox"
+        class="email-checkbox"
+        data-email-id="<%= email.id %>"
+        name="emailIds"
+        value="<%= email.id %>"
+      />
+      <p class="sender"><%= email.name %></p>
+      <p class="subject">
+        <a href="/email/<%= email.id %>"><%= email.subject %></a>
+      </p>
+      <p class="time-received"><%= email.createdAt %></p>
+    </div>
+    <% }); %>
+  </div>
+  <button type="button" id="deleteBtn">Hide Emails</button>
+  <% } %>
+  <div class="pagination">
+    <% for (let i = 1; i <= 6; i++) { %>
+    <a
+      href="/<%= title.toLowerCase() %>?page=<%= i %>"
+      class="<%= currentPage === i ? 'active' : '' %>"
+      ><%= i %></a
+    >
+    <% } %>
+  </div>
+</main>
+
+<script>
+  document
+    .getElementById("deleteBtn")
+    .addEventListener("click", deleteSelected);
+
+  document.addEventListener("change", () => {
+    const selectedEmails = document.querySelectorAll(".email-checkbox:checked");
+    deleteBtn.style.display = selectedEmails.length > 0 ? "block" : "none";
+  });
+
+  function deleteSelected() {
+    const selectedEmails = document.querySelectorAll(".email-checkbox:checked");
+    const emailIds = Array.from(selectedEmails).map(
+      (checkbox) => checkbox.value
+    );
+
+    fetch("/<%= title.toLowerCase() %>", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ emailIds }),
+    })
+      .then((response) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        // Handle errors
+      });
+  }
+</script>

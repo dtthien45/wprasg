@@ -1,0 +1,35 @@
+<%- include('header.ejs', { name }) %>
+
+<main>
+  <h2>Compose</h2>
+
+  <form action="/email" method="post" enctype="multipart/form-data">
+    <label for="recipientId">Recipient:</label>
+    <select name="recipientId" id="recipientId" required>
+      <option value="" disabled selected>Select Recipient</option>
+      <% users.forEach(user => { %>
+      <option value="<%= user.id %>"><%= user.name %></option>
+      <% }); %>
+    </select>
+
+    <label for="subject">Subject:</label>
+    <input type="text" name="subject" id="subject" placeholder="(no subject)" />
+
+    <label for="content">Content:</label>
+    <textarea name="content" id="content" rows="7"></textarea>
+
+    <label for="file">Attach File:</label>
+    <input type="file" name="file" id="file" />
+    <% if (typeof error !== 'undefined') { %>
+    <div class="error">
+      <p><strong>Error:</strong> <%= error %></p>
+    </div>
+    <% } %> <% if (typeof success !== 'undefined' ) { %>
+    <div class="success">
+      <p><strong>Success:</strong> <%= success %></p>
+    </div>
+    <% } %>
+
+    <button type="submit">Send</button>
+  </form>
+</main>

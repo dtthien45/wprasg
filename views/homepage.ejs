@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>WPR Email System</title>
+  </head>
+  <body>
+    <div class="container middle">
+      <h1>LOGIN</h1>
+      <form class="signin-form" method="post" action="/">
+        <label for="email">Username:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          required
+          class="input-field"
+          placeholder="Enter your email"
+        />
+        <br />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="input-field"
+          placeholder="Enter your password"
+        />
+        <% if (typeof error !== 'undefined') { %>
+        <p class="error"><%= error %></p>
+        <% } %>
+        <button type="submit" class="btn">Login</button>
+      </form>
+
+      <p class="signup-link">
+        <a href="/signup">Do not have an account?</a>
+      </p>
+    </div>
+  </body>
+</html>

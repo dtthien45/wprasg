@@ -1,0 +1,35 @@
+<%- include('header.ejs', { name }) %>
+
+<main>
+  <h2>Detail</h2>
+
+  <% if (typeof email !== 'undefined') { %>
+  <div class="email-info">
+    <p><span class="highlight">Subject:</span> <%= email.subject %></p>
+    <p>
+      <span class="highlight">Sender:</span> <%= email.sender.name %> (<%=
+      email.sender.email %>)
+    </p>
+    <p>
+      <span class="highlight">Recipient:</span> <%= email.recipient.name %> (<%=
+      email.recipient.email %>)
+    </p>
+    <p><span class="highlight">Time:</span> <%= email.createdAt %></p>
+  </div>
+
+  <div class="content">
+    <% if (email.filename) { %>
+    <p>
+      <span class="highlight">Attachment:</span>
+      <a href="/download/<%= email.filename %>" download="<%= email.filename %>"
+        ><%= email.filename %></a
+      >
+    </p>
+    <% } %>
+    <p><span class="highlight">Content:</span></p>
+    <p><%= email.content %></p>
+  </div>
+  <% } else { %>
+  <p>Please select one email in inbox or outbox to see detail.</p>
+  <% } %>
+</main>

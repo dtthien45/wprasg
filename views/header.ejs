@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WPR Email System</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <span>Hello, <%= name %></span>
+      </div>
+
+      <div class="logout">
+        <a href="/logout">Logout</a>
+      </div>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="/compose">Compose</a></li>
+        <li><a href="/inbox">Inbox</a></li>
+        <li><a href="/outbox">Outbox</a></li>
+        <li><a href="/email">Detail</a></li>
+      </ul>
+    </nav>
+    <div class="main-content">
